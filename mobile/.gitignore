@@ -1,0 +1,15 @@
+node_modules/
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+android/keystores/
+*.keystore
+!debug.keystore
+ios/build/
+ios/Pods/
+.expo/
+.metro/
+*.jsbundle
+coverage/
+*.log
