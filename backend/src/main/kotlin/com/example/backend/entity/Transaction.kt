@@ -1,6 +1,6 @@
-package com.expense.backend.entity
+package com.example.backend.entity
 
-import com.expense.backend.enum.TransactionType
+import com.example.backend.enum.TransactionType
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDate

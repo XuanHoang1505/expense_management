@@ -1,4 +1,4 @@
-package com.expense.backend.entity
+package com.example.backend.entity
 
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
@@ -14,7 +14,7 @@ class User(
     @Column(nullable = false, unique = true)
     val email: String = "",
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     var userPassword: String = "",
 
     @Column(name = "full_name", nullable = false)

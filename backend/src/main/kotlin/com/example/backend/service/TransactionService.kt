@@ -1,11 +1,11 @@
-package com.expense.backend.service
+package com.example.backend.service
 
-import com.expense.backend.dto.request.TransactionRequest
-import com.expense.backend.dto.response.CategoryStatsResponse
-import com.expense.backend.dto.response.SummaryResponse
-import com.expense.backend.dto.response.TransactionResponse
-import com.expense.backend.enum.TransactionType
-import com.expense.backend.entity.User
+import com.example.backend.dto.request.TransactionRequest
+import com.example.backend.dto.response.CategoryStatsResponse
+import com.example.backend.dto.response.SummaryResponse
+import com.example.backend.dto.response.TransactionResponse
+import com.example.backend.enum.TransactionType
+import com.example.backend.entity.User
 
 interface TransactionService {
     fun getAll(user: User): List<TransactionResponse>
