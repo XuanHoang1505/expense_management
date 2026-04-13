@@ -1,7 +1,6 @@
-package com.expense.backend.dto.response
+package com.example.backend.dto.response
 
 data class AuthResponse(
-    val token: String,
-    val fullName: String,
-    val email: String
+    val accessToken: String,
+    val user: UserResponse
 )

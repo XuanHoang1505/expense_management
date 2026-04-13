@@ -1,6 +1,6 @@
-package com.expense.backend.config
+package com.example.backend.config
 
-import com.expense.backend.security.JwtAuthFilter
+import com.example.backend.security.JwtAuthFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationProvider

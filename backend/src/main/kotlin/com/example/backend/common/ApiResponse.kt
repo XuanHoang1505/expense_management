@@ -1,4 +1,4 @@
-package com.expense.backend.common
+package com.example.backend.common
 
 data class ApiResponse<T>(
     val success: Boolean,

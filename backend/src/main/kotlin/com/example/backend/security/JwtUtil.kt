@@ -1,6 +1,6 @@
-package com.expense.backend.security
+package com.example.backend.security
 
-import com.expense.backend.entity.User
+import com.example.backend.entity.User
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value

@@ -1,4 +1,4 @@
-package com.expense.backend.dto.response
+package com.example.backend.dto.response
 
 import java.math.BigDecimal
 

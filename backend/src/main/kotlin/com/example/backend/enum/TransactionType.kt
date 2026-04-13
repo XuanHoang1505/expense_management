@@ -1,4 +1,4 @@
-package com.expense.backend.enum
+package com.example.backend.enum
 
 enum class TransactionType {
     INCOME, 

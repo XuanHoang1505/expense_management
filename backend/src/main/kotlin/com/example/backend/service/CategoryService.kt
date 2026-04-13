@@ -1,10 +1,10 @@
-package com.expense.backend.service
+package com.example.backend.service
 
-import com.expense.backend.dto.request.CategoryRequest
-import com.expense.backend.dto.response.CategoryResponse
-import com.expense.backend.entity.Category
-import com.expense.backend.enum.TransactionType
-import com.expense.backend.entity.User
+import com.example.backend.dto.request.CategoryRequest
+import com.example.backend.dto.response.CategoryResponse
+import com.example.backend.entity.Category
+import com.example.backend.enum.TransactionType
+import com.example.backend.entity.User
 
 interface CategoryService {
     fun getAllForUser(user: User): List<CategoryResponse>

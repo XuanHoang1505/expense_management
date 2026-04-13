@@ -1,6 +1,6 @@
-package com.expense.backend.exception
+package com.example.backend.exception
 
-import com.expense.backend.common.ApiResponse
+import com.example.backend.common.ApiResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler

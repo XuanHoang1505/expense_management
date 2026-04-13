@@ -1,6 +1,6 @@
-package com.expense.backend.dto.request
+package com.example.backend.dto.request
 
-import com.expense.backend.enum.TransactionType
+import com.example.backend.enum.TransactionType
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 

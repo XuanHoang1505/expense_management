@@ -1,8 +1,8 @@
-package com.expense.backend.service
+package com.example.backend.service
 
-import com.expense.backend.dto.request.LoginRequest
-import com.expense.backend.dto.request.RegisterRequest
-import com.expense.backend.dto.response.AuthResponse
+import com.example.backend.dto.request.LoginRequest
+import com.example.backend.dto.request.RegisterRequest
+import com.example.backend.dto.response.AuthResponse
 
 interface AuthService {
     fun register(req: RegisterRequest): AuthResponse

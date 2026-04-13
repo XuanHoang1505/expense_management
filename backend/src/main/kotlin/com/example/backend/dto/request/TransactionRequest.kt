@@ -1,10 +1,11 @@
-package com.expense.backend.dto.request
+package com.example.backend.dto.request
 
-import com.expense.backend.enum.TransactionType
+import com.example.backend.enum.TransactionType
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
 import java.math.BigDecimal
 import java.time.LocalDate
+import java.sql.Date
 
 data class TransactionRequest(
     @field:NotNull(message = "Số tiền không được để trống")
@@ -17,7 +18,7 @@ data class TransactionRequest(
     val type: TransactionType,
 
     @field:NotNull(message = "Ngày không được để trống")
-    val date: LocalDate,
+    val date: LocalDate = LocalDate.now(),
 
     @field:NotNull(message = "Danh mục không được để trống")
     val categoryId: Long
