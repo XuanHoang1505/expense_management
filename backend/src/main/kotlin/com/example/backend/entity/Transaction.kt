@@ -1,6 +1,7 @@
-package com.expense.backend.entity
+package com.example.backend.entity
 
-import com.expense.backend.enum.TransactionType
+import com.example.backend.enum.TransactionType
+import org.hibernate.annotations.SQLRestriction 
 import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDate
@@ -8,6 +9,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "transactions")
+@SQLRestriction("deleted = false") 
 class Transaction(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
@@ -33,5 +35,11 @@ class Transaction(
     val category: Category = Category(),
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(nullable = false)
+    val deleted: Boolean = false,           
+
+    @Column(name = "deleted_at")
+    val deletedAt: LocalDateTime? = null
 )

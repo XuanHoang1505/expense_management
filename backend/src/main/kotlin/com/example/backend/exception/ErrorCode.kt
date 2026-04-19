@@ -1,4 +1,4 @@
-package com.expense.backend.exception
+package com.example.backend.exception
 
 enum class ErrorCode(val code: Int, val message: String) {
     EMAIL_EXISTED(1001, "Email đã tồn tại"),
