@@ -19,17 +19,6 @@ import { colors } from '../../constants/colors';
 
 dayjs.locale('vi');
 
-const CATEGORY_ICONS: Record<string, { icon: string; color: string }> = {
-  'Ăn uống': { icon: 'food-fork-drink', color: '#4CAF50' },
-  'Di chuyển': { icon: 'car-outline', color: '#2196F3' },
-  'Mua sắm': { icon: 'cart-outline', color: '#FF9800' },
-  'Sức khoẻ': { icon: 'heart-outline', color: '#E91E63' },
-  "Lương": { icon: 'cash', color: '#4CAF50' },
-  "Thưởng": { icon: 'gift-outline', color: '#9C27B0' },
-};
-
-const DEFAULT_ICON = { icon: 'wallet-outline', color: '#607D8B' };
-
 function groupByDate(transactions: Transaction[]) {
   const groups: Record<string, Transaction[]> = {};
   transactions.forEach(t => {
@@ -40,11 +29,10 @@ function groupByDate(transactions: Transaction[]) {
   return Object.entries(groups).sort((a, b) => b[0].localeCompare(a[0]));
 }
 
-export default function TransactionListScreen() {
+export default function TransactionListScreen({ navigation }: any) {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [refreshing, setRefreshing] = useState(false);
 
-  // ← Lấy từ store thay vì gọi API trực tiếp
   const { transactions, summary, loading, fetchByMonth, fetchSummary } =
     useTransactionStore();
 
@@ -78,7 +66,10 @@ export default function TransactionListScreen() {
       <View style={styles.headerTop}>
         <Text style={styles.yearText}>{year}</Text>
         <View style={styles.headerIcons}>
-          <TouchableOpacity style={styles.iconBtn}>
+          <TouchableOpacity
+            style={styles.iconBtn}
+            onPress={() => navigation.navigate('SearchTransaction')}
+          >
             <MaterialCommunityIcons name="magnify" size={24} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconBtn}>
@@ -119,7 +110,7 @@ export default function TransactionListScreen() {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F5C518" />
+      <StatusBar barStyle="dark-content" backgroundColor={colors.primary} />
       <FlatList
         data={grouped}
         keyExtractor={item => item[0]}
@@ -155,6 +146,9 @@ export default function TransactionListScreen() {
                   key={t.id}
                   transaction={t}
                   isLast={idx === txns.length - 1}
+                  onPress={() =>
+                    navigation.navigate('DetailTransaction', { transaction: t })
+                  }
                 />
               ))}
             </View>
@@ -199,21 +193,24 @@ function SummaryItem({
 function TransactionItem({
   transaction,
   isLast,
+  onPress,
 }: {
   transaction: Transaction;
   isLast: boolean;
+  onPress: () => {};
 }) {
-  const { icon, color } =
-    CATEGORY_ICONS[transaction.categoryName] ?? DEFAULT_ICON;
   const isExpense = transaction.type === 'EXPENSE';
+  const iconName = transaction.categoryIcon ?? 'wallet-outline';
+  const iconColor = transaction.categoryColor ?? '#607D8B';
 
   return (
     <TouchableOpacity
       style={[styles.txItem, isLast && styles.txItemLast]}
       activeOpacity={0.7}
+      onPress={onPress}
     >
-      <View style={[styles.categoryIcon, { backgroundColor: color }]}>
-        <MaterialCommunityIcons name={icon} size={22} color="#fff" />
+      <View style={[styles.categoryIcon, { backgroundColor: iconColor }]}>
+        <MaterialCommunityIcons name={iconName} size={22} color="#fff" />
       </View>
       <View style={styles.txInfo}>
         <Text style={styles.txCategory}>{transaction.categoryName}</Text>
@@ -221,12 +218,20 @@ function TransactionItem({
           {transaction.note ?? transaction.categoryName}
         </Text>
       </View>
-      <Text
-        style={[styles.txAmount, { color: isExpense ? '#C62828' : '#2E7D32' }]}
-      >
-        {isExpense ? '-' : '+'}
-        {formatCurrency(transaction.amount)}
-      </Text>
+      <View style={{ alignItems: 'flex-end' }}>
+        <Text
+          style={[
+            styles.txAmount,
+            { color: isExpense ? '#C62828' : '#2E7D32' },
+          ]}
+        >
+          {isExpense ? '-' : '+'}
+          {formatCurrency(transaction.amount)}
+        </Text>
+        <Text style={styles.txName}>
+          {dayjs(transaction.createdAt).format('HH:mm')}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -246,6 +251,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 4,
+    marginTop: StatusBar.currentHeight,
   },
   yearText: { fontSize: 13, color: '#fff', fontWeight: '500' },
   headerIcons: { flexDirection: 'row', gap: 8 },

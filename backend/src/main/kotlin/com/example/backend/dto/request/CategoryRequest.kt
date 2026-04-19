@@ -10,6 +10,8 @@ data class CategoryRequest(
 
     val icon: String? = null,
 
+    val color: String = "#607D8B", 
+
     @field:NotNull(message = "Loại danh mục không được để trống")
     val type: TransactionType
 )

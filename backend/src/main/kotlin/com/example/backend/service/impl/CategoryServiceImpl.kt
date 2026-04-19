@@ -40,6 +40,7 @@ class CategoryServiceImpl(
         val category = Category(
             name = req.name,
             icon = req.icon,
+            color = req.color,
             type = req.type,
             user = user
         )
@@ -62,6 +63,7 @@ class CategoryServiceImpl(
             id   = category.id,
             name = req.name,
             icon = req.icon,
+            color = req.color,
             type = req.type,
             user = user
         )
@@ -80,13 +82,14 @@ class CategoryServiceImpl(
         if (categoryUser.id != user.id)
             throw AppException(ErrorCode.UNAUTHORIZED)
 
-        categoryRepository.delete(category)
+        categoryRepository.softDelete(category.id)
     }
 
     private fun Category.toResponse() = CategoryResponse(
         id        = id,
         name      = name,
         icon      = icon,
+        color     = color,
         type      = type,
         isDefault = (user == null)
     )

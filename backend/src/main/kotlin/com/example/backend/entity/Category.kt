@@ -2,9 +2,12 @@ package com.example.backend.entity
 
 import com.example.backend.enum.TransactionType
 import jakarta.persistence.*
+import org.hibernate.annotations.SQLRestriction
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "categories")
+@SQLRestriction("deleted = false") 
 class Category(
 
     @Id
@@ -15,6 +18,9 @@ class Category(
     val name: String = "",
 
     val icon: String? = null,
+    
+    @Column(nullable = false)
+    val color: String = "#607D8B",
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -22,6 +28,12 @@ class Category(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = true)
-    val user: User? = null
+    val user: User? = null,
+
+    @Column(nullable = false)
+    val deleted: Boolean = false,         
+
+    @Column(name = "deleted_at")
+    val deletedAt: LocalDateTime? = null
 
 )
