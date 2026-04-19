@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CategoryRepository : JpaRepository<Category, Long> {
+interface CategoryRepository : SoftDeleteRepository<Category, Long> {
     fun findByType(type: TransactionType): List<Category>
      fun findByUserIsNull(): List<Category>
 

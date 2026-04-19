@@ -10,7 +10,7 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 @Repository
-interface TransactionRepository : JpaRepository<Transaction, Long> {
+interface TransactionRepository : SoftDeleteRepository<Transaction, Long> {
 
     // Lấy tất cả giao dịch của user, sắp xếp mới nhất trước
     fun findByUserOrderByDateDesc(user: User): List<Transaction>
@@ -48,12 +48,12 @@ interface TransactionRepository : JpaRepository<Transaction, Long> {
 
     // Thống kê theo danh mục trong tháng
     @Query("""
-        SELECT t.category.id, t.category.name, t.category.icon, COALESCE(SUM(t.amount), 0)
+        SELECT t.category.id, t.category.name, t.category.icon, t.category.color, COALESCE(SUM(t.amount), 0)
         FROM Transaction t
         WHERE t.user = :user
         AND t.date BETWEEN :startDate AND :endDate
         AND t.type = :type
-        GROUP BY t.category.id, t.category.name, t.category.icon
+        GROUP BY t.category.id, t.category.name, t.category.icon, t.category.color
     """)
     fun sumByCategoryAndDateBetween(
         user: User,

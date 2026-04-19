@@ -14,5 +14,6 @@ data class TransactionResponse(
     val categoryId: Long,
     val categoryName: String,
     val categoryIcon: String?,
+    val categoryColor: String,
     val createdAt: LocalDateTime
 )

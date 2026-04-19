@@ -6,6 +6,7 @@ data class CategoryResponse(
     val id       : Long,
     val name     : String,
     val icon     : String?,
+    val color    : String,
     val type     : TransactionType,
     val isDefault: Boolean  
 )

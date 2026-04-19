@@ -9,6 +9,7 @@ export interface Transaction {
   categoryId:   number
   categoryName: string
   categoryIcon: string | null
+  categoryColor: string
   createdAt:    string
 }
 
@@ -30,6 +31,7 @@ export interface CategoryStats {
   categoryId:   number
   categoryName: string
   categoryIcon: string | null
+  categoryColor: string
   totalAmount:  number
 }
 

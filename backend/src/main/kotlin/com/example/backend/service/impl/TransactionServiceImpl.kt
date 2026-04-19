@@ -62,7 +62,7 @@ class TransactionServiceImpl(
 
     override fun delete(id: Long, user: User) {
         val existing = findOwnedTransaction(id, user)
-        transactionRepository.delete(existing)
+        transactionRepository.softDelete(existing.id)
     }
 
     override fun getSummary(user: User, year: Int, month: Int): SummaryResponse {
@@ -89,7 +89,8 @@ class TransactionServiceImpl(
                     categoryId   = row[0] as Long,
                     categoryName = row[1] as String,
                     categoryIcon = row[2] as? String,
-                    totalAmount  = row[3] as java.math.BigDecimal
+                    categoryColor = row[3] as String,
+                    totalAmount  = row[4] as java.math.BigDecimal
                 )
             }
     }
@@ -116,6 +117,7 @@ class TransactionServiceImpl(
         categoryId   = category.id,
         categoryName = category.name,
         categoryIcon = category.icon,
+        categoryColor = category.color,
         createdAt    = createdAt
     )
 }
